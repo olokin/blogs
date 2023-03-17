@@ -1,12 +1,12 @@
 module.exports = {
-  title: 'orokin-van',
+  title: 'olokin',
   description: '猫咪',
   theme: 'reco',
   base: '/blogs/',
   mode: false,
   head: [
     ['meta', { name: 'keywords', content: '个人网站' }],
-    ['meta', { name: 'author', content: 'orokin-van' }],
+    ['meta', { name: 'author', content: 'olokin' }],
     ['link', { rel: 'icon', href: '/favicon.ico' }]
   ],
   locales: {
