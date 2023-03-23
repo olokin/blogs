@@ -16,7 +16,7 @@ module.exports = {
   },
   themeConfig: {
     type: "blog",
-    author: "Van",
+    author: "olokin",
     modePicker: false,
     logo: "/author.jpg",
     authorAvatar: "/author.jpg",
