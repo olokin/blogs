@@ -9,10 +9,10 @@ tags:
 
 **盒模型**
 
-盒模型是浏览器绘制一个块级盒子时采用的标准，分为 W3C 的标准盒模型和 IE 的怪异盒模型
+盒模型是浏览器绘制一个块级盒子时采用的标准，包括内容区域、内边距、边框和外边距，分为 W3C 的标准盒模型和 IE 的怪异盒模型
 区别在于宽度 widt 和高度 height 的定义范围
-W3C 标准盒模型: width = content 的宽度，height = conetnt 的高度。
-IE 怪异盒模型: width = conent 的宽度 + 左右 padding + 左右 border, height = content 的高度 + 上下 padding + 上下 border
+W3C 标准盒模型: 元素的宽高等于内容区域的宽高。
+IE 怪异盒模型: 元素的宽高等于内容区域 + 内边距 padding + 边框 border
 
 **src 和 href 的区别**
 
