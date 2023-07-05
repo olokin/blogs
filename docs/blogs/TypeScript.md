@@ -18,8 +18,111 @@ unknown: 任何类型的值都可以赋给 unknown 类型，但是 unknown 类�
 null & undefined: 默认情况下 null 和 undefined 是所有类型的子类型
 void: 没有任何类型。例如：一个函数如果没有返回值，那么返回值可以定义为 void。
 
+**常用用法**
+
 ```js
-// 常用配置
+// 1. 属性名不确定的对象
+// 等同于 type Paths = Record<string, string>
+Reco
+type Paths = {
+  [x: string]: string,
+}
+
+
+// 2. 对象的 key 值
+type ErrorMsg = {
+  0: 'success'
+}
+type ErrorCode = keyof ErrorMsg
+
+
+// 3. 部分对象 Partial
+interface User {
+  name: string
+  age: number
+}
+// 等同于 type Criteria = Partial<User>
+type Criteria = {
+  [key in keyof User]?: User[key]
+}
+
+
+// 4. 从基础类型构造新类型
+type CuOb<K extends string | number, T> = { [key in K]: T }
+type User = {
+  username: string
+  age: number
+}
+
+// Obj1 对象的值只能为数字类型
+type Obj1 = CuOb<string, number>
+const obj1: Obj1 = {
+  a: 100, // OK
+  b: 100, // OK
+}
+
+// Obj2 对象的值只能为User类型
+type Obj2 = CuOb<string, User>
+
+const obj2: Obj2 = {
+  u1: {
+    username: 'xiaoming',
+    age: 18,
+  },
+}
+
+
+// 5.对象类型的继承
+interface Res {
+  data: any
+  status: number
+}
+
+interface Cog extends Res {
+  data: string // 改写 data 属性类型， any
+  config: any // 添加 config 属性
+}
+
+
+// 6. 对象类型的修改，extends可以继承对象类型，但不可与原类型冲突，此时可以先使用 Omit 去除需要修改的属性
+export interface TreeNode {
+  id: number
+  value: number
+  children?: TreeNode[]
+}
+
+// 1. 去除 TreeNode 的 id 属性同时修改 children 属性的类型
+export interface NodeWithoutId extends Omit<TreeNode, 'id' | 'children'> {
+  children?: NodeWithoutId[]
+}
+
+const nodeWithoutId: NodeWithoutId = {
+  value: 1,
+  children: [
+    {
+      value: 2,
+    },
+  ],
+}
+
+
+// 7. 条件判断
+export declare type Person<T extends 'User' | 'Admin'> = T extends 'User'
+  ? {
+      username: string
+    }
+  : {
+      username: string
+      role: string
+    }
+
+const user: Person<'User'> = { username: 'xiaoming' }
+
+```
+
+**常用配置**
+
+```js
 {
   /*
       tsconfig.json是ts编译器的配置文件，ts可以根据它的信息来对待吗进行编译 可以再tsconfig中写注释
